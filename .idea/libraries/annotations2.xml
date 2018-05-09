@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="annotations2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/exploded-aar/com.google.tango/sdk-ux/1.55/annotations.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

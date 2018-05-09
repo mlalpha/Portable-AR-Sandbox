@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="debug">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.0_01e4a01654f9af153999e6253095e839aed96f72.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/com.google.tango-sdk-ux-1.55_4359845eca98a32adaab66368b2493feff65fe40.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0_b6a84b6eedbf8571915a4db11e7016a6394b5610.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/debug_b71df54095e15303efd98d478a2612070f446af6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.0_ac187a1153f26afef00b2cc3d549ae7235bdec54.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/org.rajawali3d-rajawali-1.0.325_1ed94333fd8c144192d700e4aacade5bee42aea8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0_72da7745fa27960bbc64d3c888926383b3905ac9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/com.google.tango-sdk-base-1.55_9a8b9f44a0d66ba32a3eb5b45618c575c6ac0474.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java_point_cloud_example/app/build/intermediates/pre-dexed/debug/com.google.tango-sdk-support-1.55_c6ed5ffb3ff6fb4aa408b9ccee98c85e2bf238e7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
