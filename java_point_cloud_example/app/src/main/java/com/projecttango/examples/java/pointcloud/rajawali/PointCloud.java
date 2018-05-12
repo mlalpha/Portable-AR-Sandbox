@@ -68,37 +68,37 @@ public class PointCloud extends Points {
     /**
      * Pre-calculate a palette to be used to translate between point distance and RGB color.
      */
-        private int[] createPalette() {
-        int[] palette = new int[PALETTE_SIZE];
-        float[] hsv = new float[3];
-        hsv[1] = hsv[2] = 1;
-        for (int i = 0; i < PALETTE_SIZE; i++) {
-            hsv[0] = (HUE_END - HUE_BEGIN) * i / PALETTE_SIZE + HUE_BEGIN;
-            palette[i] = Color.HSVToColor(hsv);
-        }
-        return palette;
-    }
-
 //    private int[] createPalette() {
 //        int[] palette = new int[PALETTE_SIZE];
 //        float[] hsv = new float[3];
-//        /*
 //        hsv[1] = hsv[2] = 1;
 //        for (int i = 0; i < PALETTE_SIZE; i++) {
 //            hsv[0] = (HUE_END - HUE_BEGIN) * i / PALETTE_SIZE + HUE_BEGIN;
 //            palette[i] = Color.HSVToColor(hsv);
-//        }*/
-//        double[] height = {-40.0, -30.0, -20.0, -12.5, -0.75, -0.25, -0.05, 0.0, 0.25, 2.5, 6.0, 9.0, 14.0, 20.0, 25.0};
-//        int[] r = {0, 0, 0, 19, 24, 135, 176, 0, 16, 232, 161, 130, 161, 206, 255};
-//        int[] g = {0, 30, 50, 108, 140, 206, 226, 97, 122, 215, 67, 30, 161, 206, 255};
-//        int[] b = {80, 100, 102, 160, 205, 250, 255, 71, 47, 125, 0, 30, 161, 206, 255};
-//        for (int i = 0; i < PALETTE_SIZE; i++) {
-//            Color.RGBToHSV(r[i], g[i], b[i], hsv);
-//            heightColor.put(height[i], hsv);
-//            palette[i] = Color.HSVToColor(hsv);
 //        }
 //        return palette;
 //    }
+
+    private int[] createPalette() {
+        int[] palette = new int[PALETTE_SIZE];
+        float[] hsv = new float[3];
+        /*
+        hsv[1] = hsv[2] = 1;
+        for (int i = 0; i < PALETTE_SIZE; i++) {
+            hsv[0] = (HUE_END - HUE_BEGIN) * i / PALETTE_SIZE + HUE_BEGIN;
+            palette[i] = Color.HSVToColor(hsv);
+        }*/
+        double[] height = {-40.0, -30.0, -20.0, -12.5, -0.75, -0.25, -0.05, 0.0, 0.25, 2.5, 6.0, 9.0, 14.0, 20.0, 25.0};
+        int[] r = {0, 0, 0, 19, 24, 135, 176, 0, 16, 232, 161, 130, 161, 206, 255};
+        int[] g = {0, 30, 50, 108, 140, 206, 226, 97, 122, 215, 67, 30, 161, 206, 255};
+        int[] b = {80, 100, 102, 160, 205, 250, 255, 71, 47, 125, 0, 30, 161, 206, 255};
+        for (int i = 0; i < PALETTE_SIZE; i++) {
+            Color.RGBToHSV(r[i], g[i], b[i], hsv);
+            heightColor.put(height[i], hsv);
+            palette[PALETTE_SIZE-i-1] = Color.HSVToColor(hsv);
+        }
+        return palette;
+    }
 
 
     /**
