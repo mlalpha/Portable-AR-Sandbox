@@ -22,6 +22,7 @@ import org.rajawali3d.materials.Material;
 
 import java.nio.FloatBuffer;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 /**
  * Renders a point cloud using colors to indicate distance to the depth sensor.
@@ -33,12 +34,15 @@ public class PointCloud extends Points {
 
     private float[] mColorArray;
     private final int[] mPalette;
-    public static final int PALETTE_SIZE = 360;
+    public static final int PALETTE_SIZE = 15;
     public static final float HUE_BEGIN = 0;
     public static final float HUE_END = 320;
 
-    public static final double MIN_DEPTH = 0.31f;
-    public static final double MAX_DEPTH = 0.50f;
+    public static final double MIN_DEPTH = 0.15f;
+    public static final double MAX_DEPTH = 0.75f;
+
+    public static final int PRODUCT_RATIO = (int) (PALETTE_SIZE / (MAX_DEPTH - MIN_DEPTH));
+    private HashMap heightColor = new HashMap<Double, Float>();
 
     public PointCloud(int maxPoints, int floatsPerPoint) {
         super(maxPoints, floatsPerPoint, true);
@@ -55,7 +59,7 @@ public class PointCloud extends Points {
      */
     // pointCount = pointCloudData.numPoints, is the total # of points read by the camera
     // pointBuffer = pointCloudData.points
-    public void updateCloud(int pointCount, FloatBuffer pointBuffer, double avgDepth) { 
+    public void updateCloud(int pointCount, FloatBuffer pointBuffer, double avgDepth) {
         calculateColors(pointCount, pointBuffer, avgDepth);
         // Log.d("FLTBUF","FLTBUF: "+pointBuffer+" , ptCount: "+pointCount);
         updatePoints(pointCount, pointBuffer, mColorArray);
@@ -64,7 +68,7 @@ public class PointCloud extends Points {
     /**
      * Pre-calculate a palette to be used to translate between point distance and RGB color.
      */
-    private int[] createPalette() {
+        private int[] createPalette() {
         int[] palette = new int[PALETTE_SIZE];
         float[] hsv = new float[3];
         hsv[1] = hsv[2] = 1;
@@ -74,6 +78,28 @@ public class PointCloud extends Points {
         }
         return palette;
     }
+
+//    private int[] createPalette() {
+//        int[] palette = new int[PALETTE_SIZE];
+//        float[] hsv = new float[3];
+//        /*
+//        hsv[1] = hsv[2] = 1;
+//        for (int i = 0; i < PALETTE_SIZE; i++) {
+//            hsv[0] = (HUE_END - HUE_BEGIN) * i / PALETTE_SIZE + HUE_BEGIN;
+//            palette[i] = Color.HSVToColor(hsv);
+//        }*/
+//        double[] height = {-40.0, -30.0, -20.0, -12.5, -0.75, -0.25, -0.05, 0.0, 0.25, 2.5, 6.0, 9.0, 14.0, 20.0, 25.0};
+//        int[] r = {0, 0, 0, 19, 24, 135, 176, 0, 16, 232, 161, 130, 161, 206, 255};
+//        int[] g = {0, 30, 50, 108, 140, 206, 226, 97, 122, 215, 67, 30, 161, 206, 255};
+//        int[] b = {80, 100, 102, 160, 205, 250, 255, 71, 47, 125, 0, 30, 161, 206, 255};
+//        for (int i = 0; i < PALETTE_SIZE; i++) {
+//            Color.RGBToHSV(r[i], g[i], b[i], hsv);
+//            heightColor.put(height[i], hsv);
+//            palette[i] = Color.HSVToColor(hsv);
+//        }
+//        return palette;
+//    }
+
 
     /**
      * Calculate the right color for each point in the point cloud.
@@ -95,17 +121,17 @@ public class PointCloud extends Points {
             color = mPalette[colorIndex];
 
             // int param = (360 / (MAX_DEPTH - MIN_DEPTH));
-            if (z > MIN_DEPTH && z <= MAX_DEPTH){ // if the depth is inside the range.
-               int depth = (int)((z - MIN_DEPTH) * 1894);
-               try{
-                   color  = mPalette[depth];
-               }catch (Exception e){
-                   Log.d("Teest", ""+ depth +":"+z);
-               }
-            }else if (z <= 0.21f){ // if the depth distance is between camera and MIN
+            if (z > MIN_DEPTH && z <= MAX_DEPTH) { // if the depth is inside the range.
+                int depth = Math.min((int) ((z - MIN_DEPTH) * PRODUCT_RATIO), mPalette.length - 1);
+//                try {
+                color = mPalette[depth];
+//                } catch (Exception e) {
+//                    Log.d("Teest", "" + depth + ":" + z);
+//                }
+            } else if (z <= 0.21f) { // if the depth distance is between camera and MIN
                 // color = 0xFFFFFFFF;
                 color = 0xFF000000;
-            }else{ // if the depth distance is below MAX
+            } else { // if the depth distance is below MAX
                 color = 0xFF000000;
             }
 
