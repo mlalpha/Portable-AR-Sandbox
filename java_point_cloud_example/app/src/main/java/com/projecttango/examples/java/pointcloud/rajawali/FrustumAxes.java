@@ -29,9 +29,10 @@ import java.util.Stack;
  * A primitive which represents a combination of Frustum and Axes.
  */
 public class FrustumAxes extends Line3D {
-    private static final float FRUSTUM_WIDTH = 0.8f;
-    private static final float FRUSTUM_HEIGHT = 0.6f;
-    private static final float FRUSTUM_DEPTH = 0.5f;
+    private static final float BOTTOM_RATIO = 0.9f;
+    private static final float FRUSTUM_WIDTH = 0.37f * BOTTOM_RATIO;
+    private static final float FRUSTUM_HEIGHT = 0.25f * BOTTOM_RATIO;
+    private static final float FRUSTUM_DEPTH = 0.45f;
 
     public FrustumAxes(float thickness) {
         super(makePoints(), thickness, makeColors());
@@ -59,7 +60,7 @@ public class FrustumAxes extends Line3D {
 
     private static int[] makeColors() {
         int[] colors = new int[18];
-        Arrays.fill(colors, Color.BLACK);
+        Arrays.fill(colors, Color.WHITE);
         colors[0] = Color.RED;
         colors[1] = Color.RED;
         colors[2] = Color.GREEN;

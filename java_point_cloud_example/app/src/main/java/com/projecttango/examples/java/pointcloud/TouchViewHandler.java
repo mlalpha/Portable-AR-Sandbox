@@ -38,9 +38,9 @@ public class TouchViewHandler {
     private static final int TOUCH_TOP_DISTANCE = 15;
 
     // Virtual reality view parameters.
-    private static final float FIRST_PERSON_FOV = 75f; // set scale of camera depth
+    private static final float FIRST_PERSON_FOV = 75f; // set closer
     private static final int THIRD_PERSON_FOV = 65;
-    private static final int TOP_DOWN_FOV = 5;
+    private static final int TOP_DOWN_FOV = 1;
 
     private enum ViewMode {
         FIRST_PERSON, TOP_DOWN, THIRD_PERSON
@@ -80,6 +80,9 @@ public class TouchViewHandler {
             camera.setPosition(position.x + topDownCameraDelta.x, TOUCH_TOP_DISTANCE,
                     position.z + topDownCameraDelta.z);
             camera.setRotation(Vector3.Axis.X, 90);
+
+//            camera.setOrientation(orientation);
+
         } else if (viewMode == ViewMode.THIRD_PERSON) {
             camera.setPosition(position.x, position.y, position.z);
             camera.setRotZ(thirdPersonPitch);

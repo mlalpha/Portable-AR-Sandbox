@@ -73,7 +73,7 @@ public class Points extends Object3D {
      * Update the geometry of the points based on the provided points float buffer and corresponding
      * colors based on the provided float array.
      */
-    public void updatePoints(int pointCount, FloatBuffer points, float[] colors) {
+    public void updatePoints(int pointCount, float[] points, float[] colors) {
         if (pointCount > mMaxNumberOfVertices) {
             throw new RuntimeException(
                     String.format("pointClount = %d exceeds maximum number of points = %d",
@@ -83,7 +83,7 @@ public class Points extends Object3D {
         mGeometry.setVertices(points);
         mGeometry.changeBufferData(mGeometry.getVertexBufferInfo(), mGeometry.getVertices(), 0,
                 pointCount * mFloatsPerPoint);
-        mGeometry.setColors(colors);
+        mGeometry.setColors(colors); //color from pointcloud.java
         mGeometry.changeBufferData(mGeometry.getColorBufferInfo(), mGeometry.getColors(), 0,
                 pointCount * mFloatsPerColor);
     }
@@ -92,6 +92,6 @@ public class Points extends Object3D {
     public void preRender() {
         super.preRender();
          setDrawingMode(GLES20.GL_POINTS);
-         GLES10.glPointSize(1.0f);
+         // GLES10.glPointSize(1.0f);
     }
 }

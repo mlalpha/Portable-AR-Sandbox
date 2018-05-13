@@ -30,9 +30,12 @@ import com.google.tango.support.TangoSupport;
 import com.google.tango.ux.TangoUx;
 import com.google.tango.ux.UxExceptionEvent;
 import com.google.tango.ux.UxExceptionEventListener;
+//import com.projecttango.examples.java.pointcloud.rajawali.Rerender;
+//import com.projecttango.examples.java.pointcloud.rajawali.RerenderView;
 
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.hardware.display.DisplayManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,6 +88,8 @@ public class PointCloudActivity extends Activity {
     private Animation fadeInAnimation;
     private Animation fadeOutAnimation;
 
+//    private RerenderView mRerenderView;
+
     private TextView mAverageZTextView;
     private double mPointCloudPreviousTimeStamp;
 
@@ -98,6 +103,7 @@ public class PointCloudActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); //remove title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); //remove notification bar
 
@@ -107,13 +113,15 @@ public class PointCloudActivity extends Activity {
         mAverageZTextView = (TextView) findViewById(R.id.average_z_textview);
         mSurfaceView = (RajawaliSurfaceView) findViewById(R.id.gl_surface_view);
 
+
         btn_first = (Button)findViewById(R.id.first_person_button);
         btn_top = (Button)findViewById(R.id.top_down_button);
         btn_third = (Button)findViewById(R.id.third_person_button);
-        btn_third.setVisibility(View.GONE);
+//        btn_third.setVisibility(View.GONE);
         fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+//        mRerenderView = (RerenderView) findViewById(R.id.rerenderView);
 
         mPointCloudManager = new TangoPointCloudManager();
         mTangoUx = setupTangoUxAndLayout();
@@ -167,6 +175,18 @@ public class PointCloudActivity extends Activity {
                 Log.e(TAG, getString(R.string.exception_tango_error), e);
             }
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+//        mRerenderView.onResume();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+//        mRerenderView.onPause();
     }
 
     /**
@@ -299,6 +319,9 @@ public class PointCloudActivity extends Activity {
                     // Update point cloud data.
                     TangoPointCloudData pointCloud = mPointCloudManager.getLatestPointCloud();
                     if (pointCloud != null) {
+
+                        // Calculate the tango data!!!!
+
                         // Calculate the depth camera pose at the last point cloud update.
                         TangoSupport.MatrixTransformData transform =
                                 TangoSupport.getMatrixTransformAtTime(pointCloud.timestamp,
@@ -386,7 +409,7 @@ public class PointCloudActivity extends Activity {
                 Log.i(TAG, status + "Too few features");
             }
             if (uxExceptionEvent.getType() == UxExceptionEvent.TYPE_MOTION_TRACK_INVALID) {
-                Log.i(TAG, status + "Invalid poses in MotionTracking");
+                Log.i(TAG, status + "Invalid poses in MotionTracking: No enough environment light");
             }
             if (uxExceptionEvent.getType() == UxExceptionEvent.TYPE_MOVING_TOO_FAST) {
                 Log.i(TAG, status + "Moving too fast");
@@ -412,6 +435,10 @@ public class PointCloudActivity extends Activity {
      */
     public void onThirdPersonClicked(View v) {
         mRenderer.setThirdPersonView();
+    }
+
+    public void onDisplayGridClicked(View v){
+        mRenderer.displayGrid();
     }
 
     /**

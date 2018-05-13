@@ -29,14 +29,14 @@ import java.util.Stack;
  * various views.
  */
 public class Grid extends Line3D {
-    public Grid(int size, int step, float thickness, int color) {
+    public Grid(int size, float step, float thickness, int color) {
         super(calculatePoints(size, step), thickness, color);
         Material material = new Material();
         material.setColor(color);
         this.setMaterial(material);
     }
 
-    private static Stack<Vector3> calculatePoints(int size, int step) {
+    private static Stack<Vector3> calculatePoints(int size, float step) {
         Stack<Vector3> points = new Stack<Vector3>();
 
         // Rows

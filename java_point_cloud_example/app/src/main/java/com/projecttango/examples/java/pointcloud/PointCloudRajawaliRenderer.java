@@ -20,6 +20,7 @@ import com.google.atap.tangoservice.TangoPoseData;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import org.rajawali3d.math.Matrix4;
@@ -30,6 +31,8 @@ import org.rajawali3d.renderer.RajawaliRenderer;
 import com.projecttango.examples.java.pointcloud.rajawali.FrustumAxes;
 import com.projecttango.examples.java.pointcloud.rajawali.Grid;
 import com.projecttango.examples.java.pointcloud.rajawali.PointCloud;
+import com.projecttango.examples.java.pointcloud.rajawali.ContourLine;
+
 /**
  * Renderer for Point Cloud data.
  */
@@ -37,7 +40,7 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
 
     private static final float CAMERA_NEAR = 0.01f;
     private static final float CAMERA_FAR = 200f;
-    private static final int MAX_NUMBER_OF_POINTS = 60000; // can it increase?
+    private static final int MAX_NUMBER_OF_POINTS = 100000; // can it increase?
 
     private TouchViewHandler mTouchViewHandler;
 
@@ -45,7 +48,9 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
     private PointCloud mPointCloud;
     private FrustumAxes mFrustumAxes;
     private Grid mGrid;
+    private ContourLine mContourLine;
     private double avgDepth;
+    private boolean isHidenGrid = true;
 
     public PointCloudRajawaliRenderer(Context context) {
         super(context);
@@ -58,21 +63,24 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
 
     @Override
     protected void initScene() {
-        mGrid = new Grid(100, 1, 1, 0xFFCCCCCC);
+        mGrid = new Grid(1, 0.05f, 0.1f, 0xFF888888);
         mGrid.setPosition(0, -1.3f, 0);
-        // getCurrentScene().addChild(mGrid);
+//        getCurrentScene().addChild(mGrid);
+
+        mContourLine = new ContourLine(1,0.1f,1, 0xFFCCCCCC);
 
         mFrustumAxes = new FrustumAxes(3);
-        // getCurrentScene().addChild(mFrustumAxes);
+        getCurrentScene().addChild(mFrustumAxes);
 
         // Indicate four floats per point since the point cloud data comes
         // in XYZC format.
         mPointCloud = new PointCloud(MAX_NUMBER_OF_POINTS, 4);
         getCurrentScene().addChild(mPointCloud);
-        // getCurrentScene().setBackgroundColor(Color.WHITE);
+
+        getCurrentScene().setBackgroundColor(Color.BLACK);
         getCurrentCamera().setNearPlane(CAMERA_NEAR);
         getCurrentCamera().setFarPlane(CAMERA_FAR);
-        // getCurrentCamera().setFieldOfView(75); // set scale of camera depth
+        getCurrentCamera().setFieldOfView(50); // set scale of camera depth
     }
     
 
@@ -82,6 +90,7 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
      * NOTE: This needs to be called from the OpenGL rendering thread.
      */
     public void updatePointCloud(TangoPointCloudData pointCloudData, float[] openGlTdepth) {
+        // mContourLine.updateCloud(pointCloudData.numPoints, pointCloudData.points, avgDepth);
         mPointCloud.updateCloud(pointCloudData.numPoints, pointCloudData.points, avgDepth);
         Matrix4 openGlTdepthMatrix = new Matrix4(openGlTdepth);
         mPointCloud.setPosition(openGlTdepthMatrix.getTranslation());
@@ -101,8 +110,7 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
         // Conjugating the Quaternion is needed because Rajawali uses left-handed convention for
         // quaternions.
         mFrustumAxes.setOrientation(quaternion.conjugate());
-        mTouchViewHandler.updateCamera(new Vector3(translation[0], translation[1], translation[2]),
-                quaternion);
+        mTouchViewHandler.updateCamera(new Vector3(translation[0], translation[1], translation[2]), quaternion);
     }
 
     @Override
@@ -124,5 +132,15 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
 
     public void setThirdPersonView() { // third-person view
         mTouchViewHandler.setThirdPersonView();
+    }
+
+    public void displayGrid(){
+        if (isHidenGrid == true){
+            getCurrentScene().addChild(mGrid);
+            isHidenGrid = false;
+        }else{
+            getCurrentScene().removeChild(mGrid);
+            isHidenGrid = true;
+        }
     }
 }
