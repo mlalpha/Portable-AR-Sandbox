@@ -8,14 +8,15 @@ This project try to lower down the cost of the development and make the whole de
 
 
 1. Android Studio
-2. Android smartphone with depth sensing camera
-3. Projector
-4. Sand
-5. Holders
+2. Projector
+3. Sand
+4. Holders
 
 ### Device requirement
 
-Android blalala
+Android smartphone with depth sensing camera
+1. ASUS Zenfone AR
+2. Lenovo Phab 2 Pro
 
 ### Installing
 
@@ -33,6 +34,12 @@ For the hardware installation, please visit https://www.youtube.com/watch?v=LyA6
 
 The main scripts are inside app/java/com/projecttango/examples/java/point cloud.
 
-1. 
+1. PointCloud.java
+2. Points.java
+3. FrustumAxes.java
+4. Grid.java
+5. PointCloudActivity.java
+6. PointCloudRajawaliRenderer.java
+7. TouchViewHandler.java
 
 
