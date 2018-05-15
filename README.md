@@ -2,6 +2,10 @@
 
 This project try to lower down the cost of the development and make the whole device more portable and affordable for public users and education institutions.
 
+This project take Google tango-example-java(https://github.com/googlearchive/tango-examples-java) as a reference.
+
+The demo vide is [here](https://www.youtube.com/watch?v=OLO_ZaWwkNw).
+
 ## Getting Started
 
 ### Prerequisites
