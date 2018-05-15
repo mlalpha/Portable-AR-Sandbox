@@ -47,10 +47,11 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
     // Objects rendered in the scene.
     private PointCloud mPointCloud;
     private FrustumAxes mFrustumAxes;
-    private Grid mGrid;
     private ContourLine mContourLine;
+    private Grid mGrid;
     private double avgDepth;
     private boolean isHidenGrid = true;
+    private boolean isHidenFrustum = true;
 
     public PointCloudRajawaliRenderer(Context context) {
         super(context);
@@ -63,7 +64,7 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
 
     @Override
     protected void initScene() {
-        mGrid = new Grid(1, 0.05f, 0.1f, 0xFF888888);
+        mGrid = new Grid(2, 0.04f, 0.1f, 0xFF888888);
         mGrid.setPosition(0, -1.3f, 0);
 //        getCurrentScene().addChild(mGrid);
 
@@ -82,7 +83,7 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
         getCurrentCamera().setFarPlane(CAMERA_FAR);
         getCurrentCamera().setFieldOfView(50); // set scale of camera depth
     }
-    
+
 
     /**
      * Updates the rendered point cloud. For this, we need the point cloud data and the device pose
@@ -141,6 +142,16 @@ public class PointCloudRajawaliRenderer extends RajawaliRenderer {
         }else{
             getCurrentScene().removeChild(mGrid);
             isHidenGrid = true;
+        }
+    }
+
+    public void displayFrustum(){
+        if (isHidenFrustum == false){
+            getCurrentScene().addChild(mFrustumAxes);
+            isHidenFrustum = true;
+        }else{
+            getCurrentScene().removeChild(mFrustumAxes);
+            isHidenFrustum = false;
         }
     }
 }

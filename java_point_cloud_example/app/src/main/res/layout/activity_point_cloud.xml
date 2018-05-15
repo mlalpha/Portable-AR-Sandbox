@@ -17,6 +17,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
+    <!--<com.projecttango.examples.java.pointcloud.rajawali.RerenderView-->
+        <!--android:id="@+id/rerenderView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
     <org.rajawali3d.surface.RajawaliSurfaceView
         android:id="@+id/gl_surface_view"
         android:layout_width="fill_parent"
@@ -44,10 +49,10 @@
             <TextView
                 android:id="@+id/average_z_textview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:text="@string/na" />
         </LinearLayout>
-        
+
          <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +66,7 @@
             <TextView
                 android:id="@+id/point_count_textview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:text="@string/na" />
         </LinearLayout>
 
@@ -111,8 +116,22 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
         android:text="@string/display_grid"
-        android:onClick="displayGrid"/>
+        android:onClick="onDisplayGridClicked"/>
+
+    <Button
+        android:id="@+id/frustumAxes"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/top_down_button"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp"
+        android:text="@string/frustumAxes"
+        android:onClick="onDisplayFrustumClicked"/>
+
+
 
 </RelativeLayout>

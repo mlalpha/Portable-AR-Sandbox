@@ -53,20 +53,21 @@ public class FrustumAxes extends Line3D {
         Vector3 z = new Vector3(0, 0, 1);
 
         Stack<Vector3> points = new Stack<Vector3>();
-        Collections.addAll(points, o, x, o, y, o, z, o, a, b, o, b, c, o, c, d, o, d, a);
+//        Collections.addAll(points, o, x, o, y, o, z, o, a, b, o, b, c, o, c, d, o, d, a);
+        Collections.addAll(points, a, b, b, c, c, d, d, a);
 
         return points;
     }
 
     private static int[] makeColors() {
-        int[] colors = new int[18];
+        int[] colors = new int[8];
         Arrays.fill(colors, Color.WHITE);
-        colors[0] = Color.RED;
-        colors[1] = Color.RED;
-        colors[2] = Color.GREEN;
-        colors[3] = Color.GREEN;
-        colors[4] = Color.BLUE;
-        colors[5] = Color.BLUE;
+//        colors[0] = Color.RED;
+//        colors[1] = Color.RED;
+//        colors[2] = Color.GREEN;
+//        colors[3] = Color.GREEN;
+//        colors[4] = Color.BLUE;
+//        colors[5] = Color.BLUE;
         return colors;
     }
 }

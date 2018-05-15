@@ -84,6 +84,8 @@ public class PointCloudActivity extends Activity {
     private Button btn_first;
     private Button btn_top;
     private Button btn_third;
+    private Button btn_grid;
+    private Button btn_frustum;
     private boolean isHiden = false;
     private Animation fadeInAnimation;
     private Animation fadeOutAnimation;
@@ -117,7 +119,10 @@ public class PointCloudActivity extends Activity {
         btn_first = (Button)findViewById(R.id.first_person_button);
         btn_top = (Button)findViewById(R.id.top_down_button);
         btn_third = (Button)findViewById(R.id.third_person_button);
-//        btn_third.setVisibility(View.GONE);
+        btn_grid = (Button)findViewById(R.id.showGrid);
+        btn_frustum = (Button)findViewById(R.id.frustumAxes);
+
+        btn_third.setVisibility(View.GONE); // hide third-view button
         fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
@@ -441,6 +446,10 @@ public class PointCloudActivity extends Activity {
         mRenderer.displayGrid();
     }
 
+    public void onDisplayFrustumClicked(View v){
+        mRenderer.displayFrustum();
+    }
+
     /**
      * Top-down button onClick callback.
      */
@@ -455,14 +464,23 @@ public class PointCloudActivity extends Activity {
             if (!isHiden){
                 btn_first.startAnimation(fadeOutAnimation);
                 btn_top.startAnimation(fadeOutAnimation);
+                btn_frustum.startAnimation(fadeOutAnimation);
+                btn_grid.startAnimation(fadeOutAnimation);
+
                 btn_first.setVisibility(View.GONE);
                 btn_top.setVisibility(View.GONE);
+                btn_frustum.setVisibility(View.GONE);
+                btn_grid.setVisibility(View.GONE);
                 isHiden = true;
             }else{
                 btn_first.startAnimation(fadeInAnimation);
                 btn_top.startAnimation(fadeInAnimation);
+                btn_frustum.startAnimation(fadeInAnimation);
+                btn_grid.startAnimation(fadeInAnimation);
                 btn_first.setVisibility(View.VISIBLE);
                 btn_top.setVisibility(View.VISIBLE);
+                btn_frustum.setVisibility(View.VISIBLE);
+                btn_grid.setVisibility(View.VISIBLE);
                 isHiden = false;
 
             }

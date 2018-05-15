@@ -16,6 +16,7 @@
 package com.projecttango.examples.java.pointcloud;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -77,11 +78,14 @@ public class TouchViewHandler {
             camera.setOrientation(orientation);
         } else if (viewMode == ViewMode.TOP_DOWN) {
             // camera.setPosition(position);
+
             camera.setPosition(position.x + topDownCameraDelta.x, TOUCH_TOP_DISTANCE,
                     position.z + topDownCameraDelta.z);
-            camera.setRotation(Vector3.Axis.X, 90);
 
+            camera.setRotation(Vector3.Axis.X, 90); //Top view
 //            camera.setOrientation(orientation);
+
+//            Log.d("axis-z",""+camera.getRotX()+","+camera.getRotY()+","+camera.getRotZ());
 
         } else if (viewMode == ViewMode.THIRD_PERSON) {
             camera.setPosition(position.x, position.y, position.z);
@@ -135,7 +139,7 @@ public class TouchViewHandler {
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
             if (viewMode == ViewMode.TOP_DOWN) {
-                double factor = camera.getFieldOfView() / 45;
+                double factor = camera.getFieldOfView() / 100;
                 topDownCameraDelta.add(
                         new Vector3(distanceX / 100 * factor, 0, distanceY / 100 * factor));
             } else if (viewMode == ViewMode.THIRD_PERSON) {

@@ -40,8 +40,8 @@ public class PointCloud extends Points {
     public static final float HUE_BEGIN = 0;
     public static final float HUE_END = 320;
 
-    public static final double MIN_DEPTH = 0.30f;
-    public static final double MAX_DEPTH = 0.50f;
+    public static final double MIN_DEPTH = 0.39f;
+    public static final double MAX_DEPTH = 0.49f;
 
     private int arraySize = 0;
     public static final int PRODUCT_RATIO = (int) (PALETTE_SIZE / (MAX_DEPTH - MIN_DEPTH));
@@ -189,10 +189,10 @@ public class PointCloud extends Points {
                 255,255,0, //yellow
                 0,255,0, // green
                 51,204,51, // light green
+                153,204,0,
                 102,153,0, // dark green
-                0,204,153,
                 0,255,255, //light blue
-                51,204,204,
+                102,204,255,
                 0,153,255, //dark blue
                 102,102,255,
                 0,0,255}; // blue
