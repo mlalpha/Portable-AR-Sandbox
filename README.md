@@ -6,10 +6,16 @@ This project try to lower down the cost of the development and make the whole de
 
 ### Prerequisites
 
+
 1. Android Studio
 2. Android smartphone with depth sensing camera
 3. Projector
 4. Sand
+5. Holders
+
+### Device requirement
+
+Android blalala
 
 ### Installing
 
@@ -18,8 +24,15 @@ And run the code on a smartphone with depth sensing camera.
 
 For the hardware installation, please visit https://www.youtube.com/watch?v=LyA6n_P8ZJI&feature=youtu.be
 
-## Built With
+### Built With
 
 * [Tango](https://developers.google.com/tango/apis/overview) - The augmented reality platform used
 * [OpenGL ES 2.0](https://www.khronos.org/opengles/) - Used to generate the graphic by point cloud.
+
+### File description
+
+The main scripts are inside app/java/com/projecttango/examples/java/point cloud.
+
+1. 
+
 
