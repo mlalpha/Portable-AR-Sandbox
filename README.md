@@ -4,7 +4,7 @@ This project try to lower down the cost of the development and make the whole de
 
 This project take Google Example projects for Project Tango Java API(https://github.com/googlearchive/tango-examples-java) and jloehr Augmented Sandbox with Unity3D and Kinect(https://github.com/jloehr/AR-Sandbox) as references.
 
-The demo vide is [here](https://www.youtube.com/watch?v=OLO_ZaWwkNw).
+The demo video is [here](https://www.youtube.com/watch?v=OLO_ZaWwkNw).
 
 ## Getting Started
 
@@ -36,20 +36,20 @@ For the hardware installation, please visit https://www.youtube.com/watch?v=LyA6
 
 ### File description
 
-The main scripts are inside app/java/com/projecttango/examples/java/point cloud.
+The main scripts are inside app/java/com/projecttango/examples/java/pointcloud.
 
 1. PointCloud.java - Using color to indicate the depth distance. Linear interpolation for x-axis. Data size control. 
 
-2. Points.java - 
+2. Points.java - Passing point cloud data and color array to rendering process. Using for processing the point data such as duplicate, interpolate, crop, points and map the depth valute to color from the customing palette.
 
-3. FrustumAxes.java - 
+3. FrustumAxes.java - Display frame.
 
-4. Grid.java - 
+4. Grid.java - Display Grid.
 
-5. PointCloudActivity.java - A Main Activity of application to connect Tango service and collect the point cloud data to OPEN GL. Setup RajawaliRednerer. Calculate the average depth distance 
+5. PointCloudActivity.java - A Main Activity of application to connect Tango service and collect the point cloud data to OPEN GL. Setup RajawaliRednerer. Calculate the average depth distance.
 
-6. PointCloudRajawaliRenderer.java - Rendering point cloud data
+6. PointCloudRajawaliRenderer.java - Get point cloud data and pass it to customized java functions.
 
-7. TouchViewHandler.java - Handle the event which including first person view button, top-up view button and zoom in/out event.
+7. TouchViewHandler.java - Handle the events which including first person view button, top-up view button and zoom in/out event.
 
 
