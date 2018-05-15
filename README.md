@@ -2,7 +2,7 @@
 
 This project try to lower down the cost of the development and make the whole device more portable and affordable for public users and education institutions.
 
-This project take Google tango-example-java(https://github.com/googlearchive/tango-examples-java) as a reference.
+This project take Google Example projects for Project Tango Java API(https://github.com/googlearchive/tango-examples-java) and jloehr Augmented Sandbox with Unity3D and Kinect(https://github.com/jloehr/AR-Sandbox) as references.
 
 The demo vide is [here](https://www.youtube.com/watch?v=OLO_ZaWwkNw).
 
@@ -40,13 +40,13 @@ The main scripts are inside app/java/com/projecttango/examples/java/point cloud.
 
 1. PointCloud.java - Using color to indicate the depth distance. Linear interpolation for x-axis. Data size control. 
 
-2. Points.java - A Point primitive for Rajawali.
+2. Points.java - 
 
-3. FrustumAxes.java
+3. FrustumAxes.java - 
 
-4. Grid.java
+4. Grid.java - 
 
-5. PointCloudActivity.java - A Main Activity of application to connect Tango service and collect the point cloud data to OPEN GL. Setup RajawaliRednerer.
+5. PointCloudActivity.java - A Main Activity of application to connect Tango service and collect the point cloud data to OPEN GL. Setup RajawaliRednerer. Calculate the average depth distance 
 
 6. PointCloudRajawaliRenderer.java - Rendering point cloud data
 
